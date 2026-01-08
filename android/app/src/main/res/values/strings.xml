@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Pocket Money Ads</string>
+    <string name="title_activity_main">Pocket Money Ads</string>
+    <string name="package_name">com.dreambridgehq.pocketmoney</string>
+    <string name="custom_url_scheme">com.dreambridgehq.pocketmoney</string>
+</resources>

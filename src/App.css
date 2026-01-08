@@ -1,0 +1,576 @@
+/* --- Global Reset & Dark Theme --- */
+:root {
+    --bg-color: #0a0a0a;
+    --card-bg: #1a1a1a;
+    --primary: #8a2be2;
+    --primary-hover: #9370db;
+    --gold: #ffd700;
+    --text-main: #ffffff;
+    --text-sub: #a0a0a0;
+    --color-positive: #00e676;
+    /* Fintech Green */
+    --color-negative: #ff5252;
+    /* Fintech Red */
+}
+
+body {
+    background-color: #000000;
+    color: var(--text-main);
+    font-family: sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#root {
+    width: 100%;
+    max-width: 480px;
+    background-color: #000000;
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding-bottom: calc(130px + env(safe-area-inset-bottom));
+    /* Safe area support */
+}
+
+/* --- Header & Common --- */
+.app-header {
+    padding: 1rem;
+    padding-top: calc(32px + env(safe-area-inset-top));
+    padding-bottom: 16px;
+    /* Added spacing inside header or margin below */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.95);
+    /* Ensuring black background */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    margin-bottom: 16px;
+    /* Gap between header and content */
+}
+
+.app-header h1 {
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.points-badge {
+    background: rgba(255, 215, 0, 0.15);
+    color: var(--gold);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.screen {
+    padding: 1rem;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Auth --- */
+.login-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    padding: 2rem;
+    text-align: center;
+}
+
+.login-screen input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #222;
+    color: white;
+    box-sizing: border-box;
+}
+
+.login-screen button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.switch-auth {
+    margin-top: 15px;
+    color: var(--text-sub);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* --- Home --- */
+.check-in-btn {
+    width: 100%;
+    background: #222;
+    border: 1px solid #333;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.check-in-btn.disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.check-in-btn .icon {
+    font-size: 2rem;
+    margin-right: 15px;
+}
+
+.check-in-btn .text {
+    text-align: left;
+}
+
+.check-in-btn .title {
+    display: block;
+    font-weight: bold;
+}
+
+.check-in-btn .subtitle {
+    font-size: 0.8rem;
+    color: var(--text-sub);
+}
+
+.banner {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
+
+.banner h3 {
+    margin: 0 0 5px 0;
+}
+
+.banner p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.dashboard-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 1rem;
+    border: 1px solid #333;
+}
+
+.balance-info .points {
+    font-size: 2.8rem;
+    /* Larger Hierarchy */
+    font-weight: 800;
+    display: block;
+    color: var(--color-positive);
+    /* Psychology: Asset Growth */
+    text-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
+}
+
+.ranking-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    background: #151515;
+    margin-bottom: 8px;
+    border-radius: 10px;
+}
+
+.ranking-item .rank {
+    color: var(--gold);
+    width: 30px;
+    font-weight: bold;
+}
+
+.ranking-item .rank-points {
+    color: var(--primary-hover);
+    font-weight: bold;
+}
+
+/* --- Mission --- */
+.roulette-card {
+    background: linear-gradient(135deg, #1a1a1a, #000);
+    border: 1px solid var(--gold);
+    padding: 1.5rem;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.roulette-display {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    margin: 1rem 0;
+    font-family: monospace;
+    text-shadow: 0 0 10px var(--primary);
+}
+
+.spin-btn {
+    background: var(--primary);
+    color: white;
+    width: 100%;
+    padding: 15px;
+    border-radius: 50px;
+    border: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.spin-btn:disabled {
+    background: #444;
+    cursor: not-allowed;
+}
+
+.mission-item {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #2a2a2a;
+}
+
+.mission-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    background: #222;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.mission-info {
+    flex: 1;
+}
+
+.mission-info h4 {
+    margin: 0;
+}
+
+.mission-info p {
+    margin: 4px 0 0;
+    color: var(--text-sub);
+    font-size: 0.8rem;
+}
+
+.mission-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 80px;
+}
+
+.mission-btn:disabled {
+    background: #333;
+    color: #666;
+}
+
+/* --- Store --- */
+.store-tabs {
+    display: flex;
+    margin-bottom: 1rem;
+    background: #111;
+    padding: 4px;
+    border-radius: 12px;
+}
+
+.store-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #666;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.store-tab.active {
+    background: var(--primary);
+    color: white;
+}
+
+.gift-card-grid {
+    border-radius: 15px;
+    text-align: center;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    background: #000;
+    border: 1px solid #333;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.amount-php {
+    color: var(--gold);
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: block;
+    margin-top: 5px;
+}
+
+.withdraw-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+/* --- Profile (Fixed) --- */
+.profile-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    background: #333;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border: 2px solid var(--primary);
+}
+
+.lang-toggle button {
+    background: #333;
+    border: none;
+    color: #888;
+    padding: 5px 10px;
+    margin: 0 2px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.lang-toggle button.active {
+    background: white;
+    color: black;
+}
+
+.network-dashboard-card {
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+    border: 1px solid var(--gold);
+    border-radius: 15px;
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.network-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+}
+
+.network-header h3 {
+    margin: 0;
+    color: var(--gold);
+    font-size: 1rem;
+}
+
+.help-icon {
+    width: 20px;
+    height: 20px;
+    background: #333;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    font-size: 0.8rem;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.network-stats {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.stat-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+}
+
+.stat-value.gold {
+    color: var(--gold);
+}
+
+.stat-sub {
+    font-size: 0.7rem;
+    color: #555;
+    margin-top: 2px;
+}
+
+.profile-menu .menu-item {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: 1px solid #2a2a2a;
+}
+
+.profile-footer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.legal-links {
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+    color: #666;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.app-version {
+    font-size: 0.7rem;
+    color: #444;
+}
+
+#root {
+    width: 100%;
+    max-width: 480px;
+    background-color: #000000;
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    /* [Adjusted for Banner] 80px(nav) + 50px(banner) + safe-area */
+    padding-bottom: calc(130px + env(safe-area-inset-bottom));
+}
+
+/* ... (unchanged headers) ... */
+
+/* --- Bottom Nav (Adjusted) --- */
+.bottom-nav {
+    position: fixed;
+    /* Lifted above the banner (50px) + safe area */
+    bottom: calc(50px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    background: rgba(20, 20, 20, 0.98);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    /* padding-bottom removed as it now sits above the safe area */
+    border-top: 1px solid #333;
+    z-index: 100;
+}
+
+/* --- Banner Container (New) --- */
+.bottom-banner-container {
+    position: fixed;
+    /* Sit at the bottom safe area line */
+    bottom: env(safe-area-inset-bottom);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: 50px;
+    background-color: #222;
+    /* Placeholder bg */
+    z-index: 101;
+    /* Above nav if overlap, but they are stacked */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #333;
+}
+
+.bottom-banner-placeholder {
+    color: #555;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* --- Toast (Adjusted) --- */
+.toast {
+    position: fixed;
+    /* Lifted higher: 130px + buffer */
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    z-index: 1000;
+    white-space: nowrap;
+    animation: fadeIn 0.3s;
+    border: 1px solid #333;
+}
