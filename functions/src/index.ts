@@ -60,7 +60,7 @@ async function checkIpLimit(transaction: admin.firestore.Transaction, ip: string
     transaction.set(ipRef, { count: admin.firestore.FieldValue.increment(1) }, { merge: true });
 }
 
-export const requestAdReward = onCall({ cors: true }, async (request) => {
+export const requestAdReward = onCall({ cors: true, enforceAppCheck: false }, async (request) => {
     const crypto = require('crypto');
     const AD_REWARD_SECRET = "YOUR_CLIENT_SECRET_KEY_HERE";
     const data = request.data;
@@ -156,7 +156,7 @@ export const requestAdReward = onCall({ cors: true }, async (request) => {
  * - First spin: Free (no ad required)
  * - Second spin: Requires ad (tracked via dailySpinAdCount)
  */
-export const requestRouletteReward = onCall({ cors: true }, async (request) => {
+export const requestRouletteReward = onCall({ cors: true, enforceAppCheck: false }, async (request) => {
     const data = request.data;
     const contextAuth = request.auth;
     let uid;
@@ -178,13 +178,13 @@ export const requestRouletteReward = onCall({ cors: true }, async (request) => {
         const isSameDay = (userData?.lastRouletteDate || "") === today;
         const currentSpins = isSameDay ? (userData?.dailyRouletteSpins || 0) : 0;
         const dailySpinAdCount = (userData?.lastSpinAdDate === today) ? (userData?.dailySpinAdCount || 0) : 0;
-        
+
         // Logic: First spin is free (currentSpins === 0), second requires ad (currentSpins === 1 && dailySpinAdCount === 1)
         // Maximum 2 spins per day
         if (currentSpins >= 2) {
             throw new HttpsError("resource-exhausted", "일일 룰렛 기회를 모두 사용했습니다.");
         }
-        
+
         // If this is the second spin, verify that ad was watched
         if (currentSpins === 1 && dailySpinAdCount < 1) {
             throw new HttpsError("failed-precondition", "두 번째 룰렛을 하려면 광고를 시청해야 합니다.");
@@ -233,7 +233,7 @@ export const claimDailyMissionReward = onCall({ cors: true }, async (request) =>
         const userData = userDoc.data();
         const today = new Date(Date.now() + 32400000).toISOString().split('T')[0];
         if ((userData?.lastAdDate === today ? userData?.dailyAdCount : 0) < tier) throw new HttpsError("failed-precondition", "미달성");
-        
+
         let currentClaims = userData?.lastMissionClaimDate === today ? (userData?.missionClaims || []) : [];
         if (currentClaims.includes(tier)) throw new HttpsError("already-exists", "수령 완료");
 
@@ -261,7 +261,7 @@ export const updateRankings = onSchedule("every 1 hours", async () => {
  * Tracks when user watches ad for second roulette spin
  * Allows only 1 ad-watched roulette spin per day
  */
-export const requestSpinAdReward = onCall({ cors: true }, async (request) => {
+export const requestSpinAdReward = onCall({ cors: true, enforceAppCheck: false }, async (request) => {
     const contextAuth = request.auth;
     if (!contextAuth) throw new HttpsError("unauthenticated", "로그인 필요");
     const uid = contextAuth.uid;
@@ -271,15 +271,15 @@ export const requestSpinAdReward = onCall({ cors: true }, async (request) => {
         const today = new Date(Date.now() + 32400000).toISOString().split('T')[0];
         const isSameDay = (userData?.lastSpinAdDate || "") === today;
         const currentCount = isSameDay ? (userData?.dailySpinAdCount || 0) : 0;
-        
+
         if (currentCount >= 1) {
             throw new HttpsError("resource-exhausted", "일일 룰렛 광고 시청 한도 초과");
         }
-        
-        transaction.update(userRef, { 
-            dailySpinAdCount: admin.firestore.FieldValue.increment(1), 
-            lastSpinAdDate: today, 
-            totalAdCount: admin.firestore.FieldValue.increment(1) 
+
+        transaction.update(userRef, {
+            dailySpinAdCount: admin.firestore.FieldValue.increment(1),
+            lastSpinAdDate: today,
+            totalAdCount: admin.firestore.FieldValue.increment(1)
         });
         return { success: true };
     });
@@ -290,7 +290,7 @@ export const requestSpinAdReward = onCall({ cors: true }, async (request) => {
  * Grants fallback reward when ad fails to load or show
  * Limited to 20 per day per user
  */
-export const requestFallbackReward = onCall({ cors: true }, async (request) => {
+export const requestFallbackReward = onCall({ cors: true, enforceAppCheck: false }, async (request) => {
     const data = request.data;
     const contextAuth = request.auth;
     let uid;
@@ -313,7 +313,7 @@ export const requestFallbackReward = onCall({ cors: true }, async (request) => {
         const userDoc = await transaction.get(userRef);
         const userData = userDoc.data();
         checkDailyLimit(userData, today, config.self_earning_limit);
-        
+
         // Check fallback reward limit
         const isSameDay = (userData?.lastFallbackDate || "") === today;
         const fallbackCount = isSameDay ? (userData?.dailyFallbackCount || 0) : 0;
@@ -323,7 +323,7 @@ export const requestFallbackReward = onCall({ cors: true }, async (request) => {
 
         const rewardPoints = FALLBACK_REWARD_POINTS;
         const isSelfEarnSameDay = (userData?.lastSelfEarnDate || "") === today;
-        
+
         transaction.update(userRef, {
             points: admin.firestore.FieldValue.increment(rewardPoints),
             pointsToday_self: isSelfEarnSameDay ? admin.firestore.FieldValue.increment(rewardPoints) : rewardPoints,

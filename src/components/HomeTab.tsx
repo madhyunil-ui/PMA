@@ -178,7 +178,7 @@ export function HomeTab({ userData, topUsers, t, showToast }: HomeTabProps) {
             </div>
 
             {showAboutModal && (
-                <AboutModalContent t={t} onClose={() => setShowAboutModal(false)} />
+                <AboutModalContent t={t} onClose={() => setShowAboutModal(false)} viewMode="full" />
             )}
         </div>
     );

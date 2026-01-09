@@ -292,7 +292,7 @@ export function ProfileTab({ userData, t: tDict, lang, setLang, showToast, curre
             </div>
 
             {showNetworkModal && (
-                <AboutModalContent t={tDict} onClose={() => setShowNetworkModal(false)} />
+                <AboutModalContent t={tDict} onClose={() => setShowNetworkModal(false)} viewMode="ranking" />
             )}
 
             {/* 🛑 계정 삭제 확인 모달 */}

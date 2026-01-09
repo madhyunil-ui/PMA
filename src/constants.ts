@@ -1,4 +1,4 @@
-export const APP_VERSION = "v1.1.5";
+export const APP_VERSION = "v1.1.6";
 export const EXCHANGE_RATE = 2500; // 1 PHP = 2500 Points
 export const MAX_DAILY_ADS = 50;
 export const MAX_DAILY_ROULETTE = 2; // Roulette: 2 times per day (first free, second requires ad)

@@ -70,6 +70,32 @@ body {
     border: 1px solid rgba(255, 215, 0, 0.3);
 }
 
+/* --- Nav Item (New) --- */
+.nav-item {
+    background: transparent;
+    border: none;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.nav-item.active {
+    color: var(--primary);
+}
+
+.nav-icon {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+}
+
+.nav-label {
+    font-size: 0.7rem;
+}
+
 .screen {
     padding: 1rem;
     animation: fadeIn 0.3s ease-in-out;
@@ -523,8 +549,10 @@ body {
     width: 100%;
     max-width: 480px;
     background: rgba(20, 20, 20, 0.98);
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    /* Changed to Grid */
+    grid-template-columns: repeat(5, 1fr);
+    /* Exactly 5 equal columns */
     padding: 10px 0;
     /* padding-bottom removed as it now sits above the safe area */
     border-top: 1px solid #333;
