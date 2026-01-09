@@ -8,8 +8,8 @@ android {
         applicationId "com.dreambridgehq.pocketmoney"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 36
-        versionName "1.1.6"
+        versionCode 37
+        versionName "1.1.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         aaptOptions {
@@ -69,7 +69,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
-    implementation "com.unity3d.ads:unity-ads:4.12.0"
+    implementation "com.google.android.gms:play-services-ads:23.0.0"
     implementation "androidx.multidex:multidex:2.0.1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.22"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"

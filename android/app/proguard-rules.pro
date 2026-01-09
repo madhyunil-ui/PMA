@@ -26,8 +26,13 @@
 -keep class **.R$mipmap { *; }
 -keep class **.R$raw { *; }
 
-# [4. Unity Ads 안정화]
-# Unity Ads SDK ProGuard Rules
--keep class com.unity3d.ads.** { *; }
--keep interface com.unity3d.ads.** { *; }
+# [4. AdMob Ads 안정화]
+-keep class com.google.android.gms.ads.** { *; }
+-keep interface com.google.android.gms.ads.** { *; }
+
+# [5. Javascript Bridge 유지]
+# Bridge 메서드가 난독화되지 않도록 유지
+-keepclassmembers class com.dreambridgehq.pocketmoney.MainActivity {
+    public *;
+}
 
